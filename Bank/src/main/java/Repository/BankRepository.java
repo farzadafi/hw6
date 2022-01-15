@@ -10,12 +10,14 @@ import java.sql.SQLException;
 public class BankRepository {
     private Connection connection = Singleton.getInstance().getConnection();
 
+    //::::>
     public BankRepository() throws SQLException, ClassNotFoundException {
         String createTableBank = "CREATE TABLE IF NOT EXISTS Bank (id serial,name varchar(50)) ";
         PreparedStatement preparedStatement = connection.prepareStatement(createTableBank);
         preparedStatement.execute();
     }
 
+    //::::>
     public int findBank(Bank bank) throws SQLException {
         String find = "SELECT * FROM Bank WHERE name = ? ";
         PreparedStatement preparedStatement = connection.prepareStatement(find);
@@ -26,4 +28,13 @@ public class BankRepository {
         else
             return 0;
     }
+
+    //::::>
+    public void importBank(Bank bank) throws SQLException {
+        String insertBank = "INSERT INTO Bank (name) VALUES (?) ";
+        PreparedStatement preparedStatement = connection.prepareStatement(insertBank);
+        preparedStatement.setString(1,bank.getName());
+        preparedStatement.executeUpdate();
+    }
+
 }
