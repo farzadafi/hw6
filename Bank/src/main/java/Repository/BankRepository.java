@@ -12,7 +12,7 @@ public class BankRepository implements Repository<Bank>{
 
     //::::>
     public BankRepository() throws SQLException, ClassNotFoundException {
-        String createTableBank = "CREATE TABLE IF NOT EXISTS Bank (id serial,nameBank varchar(50) PRIMARY KEY) ";
+        String createTableBank = "CREATE TABLE IF NOT EXISTS Bank(id serial,nameBank varchar(50) PRIMARY KEY)";
         PreparedStatement preparedStatement = connection.prepareStatement(createTableBank);
         preparedStatement.execute();
     }
