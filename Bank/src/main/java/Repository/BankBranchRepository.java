@@ -45,4 +45,15 @@ public class BankBranchRepository implements Repository<BankBranch> {
         else
             return 0;
     }
+
+    public String findCodeBranch(String nationalId) throws SQLException {
+        String findCode = "SELECT * FROM BankBranch WHERE nationalId = ? ";
+        PreparedStatement preparedStatement = connection.prepareStatement(findCode);
+        preparedStatement.setString(1,nationalId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if(resultSet.next())
+            return resultSet.getString("codeBranch");
+        else
+            return null;
+    }
 }
