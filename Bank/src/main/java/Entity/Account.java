@@ -3,10 +3,10 @@ import java.math.BigInteger;
 
 public class Account {
     private String codeBranch,nationalId,accountNumber;
-    BigInteger budget;
+    Double budget;
     TypeAccount typeAccount;
 
-    public Account(String codeBranch, String nationalId, String accountNumber, BigInteger budget,TypeAccount typeAccount) {
+    public Account(String codeBranch, String nationalId, String accountNumber, Double budget,TypeAccount typeAccount) {
         this.codeBranch = codeBranch;
         this.nationalId = nationalId;
         this.accountNumber = accountNumber;
@@ -26,7 +26,7 @@ public class Account {
         return accountNumber;
     }
 
-    public BigInteger getBudget() {
+    public Double getBudget() {
         return budget;
     }
 
