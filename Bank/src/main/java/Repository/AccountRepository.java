@@ -15,7 +15,7 @@ public class AccountRepository implements Repository<Account> {
                 "Account(id serial," +
                 "codeBranch varchar(50) REFERENCES BankBranch(codeBranch)," +
                 "nationalId varchar(50) REFERENCES Customer(nationalId)," +
-                "accountNumber varchar(50) ," +
+                "accountnumber varchar(50) ," +
                 "budget DECIMAL, " +
                 "status varchar(50))";
         PreparedStatement preparedStatement = connection.prepareStatement(createTable);
@@ -24,7 +24,7 @@ public class AccountRepository implements Repository<Account> {
 
     @Override
     public void add(Account account) throws SQLException {
-        String insertAccount = " INSERT INTO Customer(codeBranch,nationalId,accountNumber,budget,status) VALUES (?, ?, ?, ?, ?)";
+        String insertAccount = " INSERT INTO Account(codeBranch,nationalId,accountnumber,budget,status) VALUES (?, ?, ?, ?, ?)";
         PreparedStatement preparedStatement = connection.prepareStatement(insertAccount);
         preparedStatement.setString(1,account.getCodeBranch());
         preparedStatement.setString(2,account.getNationalId());
