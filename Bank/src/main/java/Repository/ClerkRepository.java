@@ -4,6 +4,7 @@ import Entity.Clerk;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ClerkRepository implements Repository<Clerk> {
@@ -34,5 +35,16 @@ public class ClerkRepository implements Repository<Clerk> {
     @Override
     public int find(String input) throws SQLException {
         return 0;
+    }
+
+    public String findCodeBranch(String nationalId) throws SQLException {
+        String findCode = "SELECT * FROM Clerk WHERE nationalId = ? ";
+        PreparedStatement preparedStatement = connection.prepareStatement(findCode);
+        preparedStatement.setString(1,nationalId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if(resultSet.next())
+            return resultSet.getString("codeBranch");
+        else
+            return null;
     }
 }
