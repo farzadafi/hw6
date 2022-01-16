@@ -2,18 +2,18 @@ package Entity;
 import java.math.BigInteger;
 
 public class Account {
-    private String codeBranck,nationalId,accountNumber;
+    private String codeBranch,nationalId,accountNumber;
     BigInteger budget;
 
-    public Account(String codeBranck, String nationalId, String accountNumber, BigInteger budget) {
-        this.codeBranck = codeBranck;
+    public Account(String codeBranch, String nationalId, String accountNumber, BigInteger budget) {
+        this.codeBranch = codeBranch;
         this.nationalId = nationalId;
         this.accountNumber = accountNumber;
         this.budget = budget;
     }
 
-    public String getCodeBranck() {
-        return codeBranck;
+    public String getCodeBranch() {
+        return codeBranch;
     }
 
     public String getNationalId() {
