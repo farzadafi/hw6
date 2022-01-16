@@ -12,7 +12,7 @@ public class BankRepository implements Repository<Bank>{
 
     //::::>
     public BankRepository() throws SQLException, ClassNotFoundException {
-        String createTableBank = "CREATE TABLE IF NOT EXISTS Bank (id serial,name varchar(50)) ";
+        String createTableBank = "CREATE TABLE IF NOT EXISTS Bank (id serial,name varchar(50) PRIMARY KEY) ";
         PreparedStatement preparedStatement = connection.prepareStatement(createTableBank);
         preparedStatement.execute();
     }
@@ -26,10 +26,10 @@ public class BankRepository implements Repository<Bank>{
     }
 
     //::::>
-    public int findBank(Bank bank) throws SQLException {
+    public int find(String name) throws SQLException {
         String find = "SELECT * FROM Bank WHERE name = ? ";
         PreparedStatement preparedStatement = connection.prepareStatement(find);
-        preparedStatement.setString(1,bank.getName());
+        preparedStatement.setString(1,name);
         ResultSet resultSet = preparedStatement.executeQuery();
         if(resultSet.next())
             return 1;
