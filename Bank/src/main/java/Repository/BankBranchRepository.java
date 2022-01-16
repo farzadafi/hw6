@@ -10,7 +10,16 @@ import java.sql.SQLException;
 public class BankBranchRepository implements Repository<BankBranch> {
     private Connection connection = Singleton.getInstance().getConnection();
 
+    //::::>
     public BankBranchRepository() throws SQLException, ClassNotFoundException {
+        String createTable = "CREATE TABLE IF NOT EXISTS BankBranch(id serial," +
+                                                                    "nameBank varchar(50) REFERENCES Bank(nameBank)," +
+                                                                    "codeBranch varchar(50) PRIMARY KEY,"+
+                                                                    "BossFullName varchar(50)," +
+                                                                    "nationalId varchar(50)," +
+                                                                    "password varchar(50) )";
+        PreparedStatement preparedStatement = connection.prepareStatement(createTable);
+        preparedStatement.execute();
     }
 
     @Override
