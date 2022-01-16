@@ -27,6 +27,9 @@ public class BankService {
         }
     }
 
+    public int findBankName(String name) throws SQLException {
+        return bankRepository.find(name);
+    }
 
 
 
