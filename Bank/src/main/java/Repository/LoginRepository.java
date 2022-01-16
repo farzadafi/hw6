@@ -19,7 +19,7 @@ public class LoginRepository implements Repository<Login> {
 
     @Override
     public void add(Login login) throws SQLException {
-        String insert = "";
+        String insert = "INSERT INTO Login (username,password,kind) VALUES (? ,? ,?)";
         PreparedStatement preparedStatement = connection.prepareStatement(insert);
         preparedStatement.setString(1,login.getUsername());
         preparedStatement.setString(2,login.getPassword());
