@@ -15,6 +15,7 @@ public class Menu {
     private LoginService loginService = new LoginService();
     private ClerkService clerkService = new ClerkService();
     private CustomerService customerService = new CustomerService();
+    private AccountService accountService = new AccountService();
 
 
     public Menu() throws SQLException, ClassNotFoundException {
@@ -149,7 +150,8 @@ public class Menu {
                     break;
 
                 case 2:
-
+                    if( accountService.addAccount(username) == 1 )
+                        System.out.println("This account successful added!");
                     break;
 
                 case 3:
