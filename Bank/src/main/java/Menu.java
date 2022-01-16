@@ -67,7 +67,13 @@ public class Menu {
                     break;
 
                 case 2:
-                    bankBranchService.addBankBranch();
+                    int result = bankBranchService.addBankBranch();
+                    if(result == 1 )
+                        System.out.println("This name Bank you enter doesn't Exists!");
+                    else if(result == 2)
+                        System.out.println("This code Branch already Exists!");
+                    else
+                        System.out.println("This branch Bank you enter successful added!");
                     break;
 
                 case 3:
