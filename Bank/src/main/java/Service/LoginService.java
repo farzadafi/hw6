@@ -23,4 +23,8 @@ public class LoginService {
         loginRepository.add(login);
     }
 
+    public String findLogin(String username,String password) throws SQLException {
+        return loginRepository.findLogin(username,password);
+    }
+
 }//
