@@ -1,8 +1,5 @@
 import Entity.Bank;
-import Service.BankBranchService;
-import Service.BankService;
-import Service.ClerkService;
-import Service.LoginService;
+import Service.*;
 
 import java.sql.SQLException;
 import java.util.Scanner;
@@ -17,6 +14,7 @@ public class Menu {
     private BankBranchService bankBranchService = new BankBranchService();
     private LoginService loginService = new LoginService();
     private ClerkService clerkService = new ClerkService();
+    private CustomerService customerService = new CustomerService();
 
 
     public Menu() throws SQLException, ClassNotFoundException {
@@ -58,8 +56,7 @@ public class Menu {
             else if( resultFind.equals("BOSS"))
                 bossMenu();
             else if( resultFind.equals("CLERK"))
-                System.out.println("clerkMenu");
-                //clerkMenu();
+                clerkMenu();
             else if( resultFind.equals("CUSTOMER"))
                 System.out.println("customer menu");
                 //customerMenu();
@@ -102,9 +99,9 @@ public class Menu {
 
                 default:
                     System.out.println("you enter a wrong number!");
-            }//switch
-        }//while
-    }//adminMenu
+            }
+        }
+    }
 
     //::::>
     public void bossMenu() throws SQLException {
@@ -130,10 +127,48 @@ public class Menu {
                 default:
                     System.out.println("you enter a wrong number");
 
+            }
+        }
+    }
+
+    public void clerkMenu() throws SQLException {
+        isTrue = true;
+        while(isTrue){
+            System.out.println("*** Clerk Menu ***");
+            System.out.println("1-Add Customer.");
+            System.out.println("2-Add account Customer.");
+            System.out.println("3-Add Credit Card Account.");
+            System.out.println("10-Exit.");
+            System.out.print("Please select a number:");
+            command = input.nextInt();
+            input.nextLine();
+            switch(command){
+                case 1:
+                    String result = customerService.addCustomer(username);
+                    System.out.println( result + " successful added!");
+                    break;
+
+                case 2:
+
+                    break;
+
+                case 3:
+
+                    break;
+
+                case 10:
+                    System.out.println("Good luck!");
+                    isTrue = false;
+                    break;
+
+                default:
+                    System.out.println("you enter a wrong number!");
+
             }//switch
+
         }//while
 
-    }//bossMenu
+    }//clerkMenu
 
 
 
