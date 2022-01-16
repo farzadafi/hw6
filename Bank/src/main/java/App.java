@@ -9,14 +9,10 @@ public class App {
         while(true){
             switch(menu.publicMenu()){
                 case 1:
-                    menu.registerMenu();
-                    break;
-
-                case 2:
                     menu.enterMenu();
                     break;
 
-                case 3:
+                case 2:
                     System.out.println("Have a nice day!");
                     break;
 
