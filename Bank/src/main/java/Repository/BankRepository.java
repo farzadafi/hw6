@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class BankRepository {
+public class BankRepository implements Repository<Bank>{
     private Connection connection = Singleton.getInstance().getConnection();
 
     //::::>
@@ -15,6 +15,14 @@ public class BankRepository {
         String createTableBank = "CREATE TABLE IF NOT EXISTS Bank (id serial,name varchar(50)) ";
         PreparedStatement preparedStatement = connection.prepareStatement(createTableBank);
         preparedStatement.execute();
+    }
+
+    //::::>
+    public void add(Bank bank) throws SQLException {
+        String insertBank = "INSERT INTO Bank (name) VALUES (?) ";
+        PreparedStatement preparedStatement = connection.prepareStatement(insertBank);
+        preparedStatement.setString(1,bank.getName());
+        preparedStatement.executeUpdate();
     }
 
     //::::>
@@ -29,12 +37,5 @@ public class BankRepository {
             return 0;
     }
 
-    //::::>
-    public void importBank(Bank bank) throws SQLException {
-        String insertBank = "INSERT INTO Bank (name) VALUES (?) ";
-        PreparedStatement preparedStatement = connection.prepareStatement(insertBank);
-        preparedStatement.setString(1,bank.getName());
-        preparedStatement.executeUpdate();
-    }
 
-}
+}//
