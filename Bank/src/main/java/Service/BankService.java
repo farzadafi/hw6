@@ -16,7 +16,7 @@ public class BankService {
 
     //::::>
     public int addBank() throws SQLException {
-        System.out.println("Please enter you name Bank:");
+        System.out.print("Please enter you name Bank:");
         nameBank = input.nextLine();
         if( bankRepository.find(nameBank) == 1 )
             return 1;
