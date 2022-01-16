@@ -1,6 +1,7 @@
 package Repository;
 
 import Entity.Login;
+import Entity.TypeUser;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,7 +19,12 @@ public class LoginRepository implements Repository<Login> {
 
     @Override
     public void add(Login login) throws SQLException {
-
+        String insert = "";
+        PreparedStatement preparedStatement = connection.prepareStatement(insert);
+        preparedStatement.setString(1,login.getUsername());
+        preparedStatement.setString(2,login.getPassword());
+        preparedStatement.setString(3, String.valueOf(login.getTypeUser()));
+        preparedStatement.executeUpdate();
     }
 
     @Override
