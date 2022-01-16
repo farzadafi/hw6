@@ -5,6 +5,8 @@ import Entity.Bank;
 import java.sql.SQLException;
 
 public interface Repository<T> {
-    public void add(T t)throws SQLException;
+    void add(T t)throws SQLException;
+
+    int find(String input) throws SQLException;
 
 }
