@@ -11,4 +11,24 @@ public class Person {
         this.password = password;
         this.typeUser = typeUser;
     }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public String getNationalId() {
+        return nationalId;
+    }
+
+    public String getCodeBranch() {
+        return codeBranch;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public TypeUser getTypeUser() {
+        return typeUser;
+    }
 }
