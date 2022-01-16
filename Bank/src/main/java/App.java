@@ -9,11 +9,11 @@ public class App {
         while(true){
             switch(menu.publicMenu()){
                 case 1:
-                    menu.RigesterMenu();
+                    menu.registerMenu();
                     break;
 
                 case 2:
-                    menu.EnterMenu();
+                    menu.enterMenu();
                     break;
 
                 case 3:
