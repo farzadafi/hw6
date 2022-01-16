@@ -13,10 +13,11 @@ public class App {
 
                 case 2:
                     System.out.println("Have a nice day!");
-                    break;
+                    System.exit(0);
 
                 case 0:
                     System.out.println("you enter a wrong number!");
+                    break;
             }
         }
     }
