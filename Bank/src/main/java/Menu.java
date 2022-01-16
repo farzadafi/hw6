@@ -1,6 +1,7 @@
 import Entity.Bank;
 import Service.BankBranchService;
 import Service.BankService;
+import Service.LoginService;
 
 import java.sql.SQLException;
 import java.util.Scanner;
@@ -13,6 +14,7 @@ public class Menu {
     private Bank bank = new Bank();
     private BankService bankService = new BankService();
     private BankBranchService bankBranchService = new BankBranchService();
+    private LoginService loginService = new LoginService();
 
     public Menu() throws SQLException, ClassNotFoundException {
     }
@@ -45,6 +47,21 @@ public class Menu {
         password = input.nextLine();
         if( username.equals("admin") && password.equals("admin") )
             adminMenu();
+        else{
+            String resultFind = loginService.findLogin(username,password);
+            if (resultFind == null ) {
+                System.out.println("you enter a wrong username and password,please be carefully!");
+            }
+            else if( resultFind.equals("BOSS"))
+                System.out.println("boss menu");
+                //bossMenu();
+            else if( resultFind.equals("CLERK"))
+                System.out.println("clerkMenu");
+                //clerkMenu();
+            else if( resultFind.equals("CUSTOMER"))
+                System.out.println("customer menu");
+                //customerMenu();
+        }
     }
 
     //::::>
