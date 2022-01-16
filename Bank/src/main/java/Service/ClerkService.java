@@ -39,5 +39,9 @@ public class ClerkService {
         return fullName;
     }
 
+    public String findCodeBranch(String nationalId) throws SQLException {
+        return clerkRepository.findCodeBranch(nationalId);
+    }
+
 
 }
