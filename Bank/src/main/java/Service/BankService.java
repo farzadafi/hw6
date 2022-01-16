@@ -4,19 +4,24 @@ import Entity.Bank;
 import Repository.BankRepository;
 
 import java.sql.SQLException;
+import java.util.Scanner;
 
 public class BankService {
-    BankRepository bankRepository = new BankRepository();
+    private Scanner input = new Scanner(System.in);
+    private String nameBank;
+    private BankRepository bankRepository = new BankRepository();
 
     public BankService() throws SQLException, ClassNotFoundException {
     }
 
     //::::>
-    public int addBank(Bank bank) throws SQLException {
-        int find = bankRepository.findBank(bank);
-        if(find == 1)
-            return find;
+    public int addBank() throws SQLException {
+        System.out.println("Please enter you name Bank:");
+        nameBank = input.nextLine();
+        if( bankRepository.find(nameBank) == 1 )
+            return 1;
         else{
+            Bank bank = new Bank(nameBank);
             bankRepository.add(bank);
             return 2;
         }
