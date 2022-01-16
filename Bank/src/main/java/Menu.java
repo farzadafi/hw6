@@ -33,6 +33,17 @@ public class Menu {
         password = input.nextLine();
         if( username.equals("admin") && password.equals("admin") )
             adminMenu();
+    }
+
+    //::::>
+    public void adminMenu(){
+        System.out.println("*** Admin Menu ***");
+        System.out.println("1-Add Bank.");
+        System.out.println("2-add Bank Branch.");
+        System.out.println("3-Exit.");
+        command = input.nextInt();
+        input.nextLine();
+
 
     }
 
