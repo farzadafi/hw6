@@ -49,6 +49,11 @@ public class BankBranchService {
         return 3;
     }
 
+    //::::>
+    public String findCodeBranch(String nationalId) throws SQLException {
+        return bankBranchRepository.findCodeBranch(nationalId);
+    }
+
 
 
 
