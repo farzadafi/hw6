@@ -14,7 +14,7 @@ public class CustomerRepository implements Repository<Customer> {
                 "Customer(id serial," +
                 "fullName varchar(50)," +
                 "nationalId varchar(50) PRIMARY KEY ," +
-                "codeBranch varchar(50)," + "" +
+                "codeBranch varchar(50) REFERENCES BankBranch(codeBranch)," +
                 "password varchar(50))";
         PreparedStatement preparedStatement = connection.prepareStatement(createTable);
         preparedStatement.execute();
