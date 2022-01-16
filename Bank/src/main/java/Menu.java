@@ -1,6 +1,7 @@
 import Entity.Bank;
 import Service.BankBranchService;
 import Service.BankService;
+import Service.ClerkService;
 import Service.LoginService;
 
 import java.sql.SQLException;
@@ -15,6 +16,8 @@ public class Menu {
     private BankService bankService = new BankService();
     private BankBranchService bankBranchService = new BankBranchService();
     private LoginService loginService = new LoginService();
+    private ClerkService clerkService = new ClerkService();
+
 
     public Menu() throws SQLException, ClassNotFoundException {
     }
@@ -53,8 +56,7 @@ public class Menu {
                 System.out.println("you enter a wrong username and password,please be carefully!");
             }
             else if( resultFind.equals("BOSS"))
-                System.out.println("boss menu");
-                //bossMenu();
+                bossMenu();
             else if( resultFind.equals("CLERK"))
                 System.out.println("clerkMenu");
                 //clerkMenu();
@@ -101,11 +103,37 @@ public class Menu {
                 default:
                     System.out.println("you enter a wrong number!");
             }//switch
+        }//while
+    }//adminMenu
 
+    //::::>
+    public void bossMenu() throws SQLException {
+        isTrue = true;
+        while(isTrue) {
+            System.out.println("*** Boss Menu ***");
+            System.out.println("1-add clerk.");
+            System.out.println("2-Exit.");
+            System.out.print("Please select a number:");
+            command = input.nextInt();
+            input.nextLine();
+            switch(command){
+                case 1:
+                    String result = clerkService.addClerk(username);
+                    System.out.println( result + " successful added!");
+                    break;
+
+                case 2:
+                    System.out.println("Good luck!");
+                    isTrue = false;
+                    break;
+
+                default:
+                    System.out.println("you enter a wrong number");
+
+            }//switch
         }//while
 
-
-    }//adminMenu
+    }//bossMenu
 
 
 
