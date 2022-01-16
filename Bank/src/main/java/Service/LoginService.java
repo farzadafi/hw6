@@ -1,5 +1,7 @@
 package Service;
 
+import Entity.Login;
+import Entity.TypeUser;
 import Repository.LoginRepository;
 
 import java.sql.SQLException;
@@ -15,5 +17,10 @@ public class LoginService {
         return loginRepository.find(nationalId);
     }
 
+    //::::>
+    public void addNewLogin(String username, String password, TypeUser typeUser) throws SQLException {
+        Login login = new Login(username,password,typeUser);
+        loginRepository.add(login);
+    }
 
 }//
