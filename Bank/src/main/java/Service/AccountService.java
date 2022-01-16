@@ -34,7 +34,7 @@ public class AccountService {
             else
                 break;
         }
-        int number = random.nextInt(8);
+        int number = random.nextInt(11111111,99999999);
         System.out.print("Enter budget:");
         budget = input.nextDouble();
         Account newAccount = new Account(codeBranch,nationalId,String.valueOf(number),budget, TypeAccount.ACTIVE);
