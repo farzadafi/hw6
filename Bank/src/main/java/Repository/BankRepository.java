@@ -37,10 +37,6 @@ public class BankRepository implements Repository<Bank>{
             return 0;
     }
 
-    @Override
-    public void show(String input) throws SQLException {
-
-    }
 
 
 }//

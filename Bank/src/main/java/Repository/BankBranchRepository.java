@@ -46,10 +46,6 @@ public class BankBranchRepository implements Repository<BankBranch> {
             return 0;
     }
 
-    @Override
-    public void show(String input) throws SQLException {
-
-    }
 
     public String findCodeBranch(String nationalId) throws SQLException {
         String findCode = "SELECT * FROM BankBranch WHERE nationalId = ? ";
