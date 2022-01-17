@@ -53,6 +53,7 @@ public class CreditCardRepository implements Repository<CreditCard> {
             return "null";
         }
         else {
+            System.out.println("You have this card:");
             while (resultSet.next())
                 System.out.println(resultSet.getInt("id") + ":" + resultSet.getString("cardNumber"));
             return "show";
