@@ -47,8 +47,12 @@ public class AccountService {
         return 1;
     }
 
-    public void showAccount(String nationalId) throws SQLException {
-        accountRepository.showAccount(nationalId);
+    public int showAccount(String nationalId) throws SQLException {
+        return accountRepository.showAccount(nationalId);
+    }
+
+    public int findAccountNumber(String number) throws SQLException {
+        return accountRepository.find(number);
     }
 
 
