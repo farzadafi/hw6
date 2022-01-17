@@ -49,7 +49,14 @@ public class CreditCardRepository implements Repository<CreditCard> {
 
     @Override
     public void show(String input) throws SQLException {
-
+        String show = "select  * from creditcard INNER JOIN account ON account.accountnumber = creditcard.accountnumber where account.nationalid = ? ";
+        PreparedStatement preparedStatement = connection.prepareStatement(show);
+        preparedStatement.setString(1,input);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if(resultSet != null ){
+            while(resultSet.next())
+                System.out.println(resultSet.getInt("id") + ":" + resultSet.getString("cardNumber"));
+        }
     }
 
     public int findActiveCard(String accountNumber) throws SQLException {
