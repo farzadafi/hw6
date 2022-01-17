@@ -46,6 +46,6 @@ public class CustomerRepository implements Repository<Customer> {
         if(resultSet.next())
             return resultSet.getString("fullName");
         else
-            return null;
+            return "null";
     }
 }
