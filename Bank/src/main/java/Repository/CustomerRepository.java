@@ -4,6 +4,7 @@ import Entity.Customer;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class CustomerRepository implements Repository<Customer> {
@@ -34,5 +35,17 @@ public class CustomerRepository implements Repository<Customer> {
     @Override
     public int find(String input) throws SQLException {
         return 0;
+    }
+
+    //::::>
+    public String findName(String nationalId) throws SQLException {
+        String find = "SELECT * FROM Customer WHERE nationalId = ? ";
+        PreparedStatement preparedStatement = connection.prepareStatement(find);
+        preparedStatement.setString(1,nationalId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if(resultSet.next())
+            return resultSet.getString("fullName");
+        else
+            return null;
     }
 }
