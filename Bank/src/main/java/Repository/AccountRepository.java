@@ -53,8 +53,10 @@ public class AccountRepository implements Repository<Account> {
         preparedStatement.setString(1,nationalId);
         ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                if ((resultSet.getString("status").equals("ACTIVE")))
+                if ((resultSet.getString("status").equals("ACTIVE"))) {
+                    System.out.print(resultSet.getInt("id") + ": ");
                     System.out.println(resultSet.getString("accountnumber"));
+                }
             }
             return 1;
     }
