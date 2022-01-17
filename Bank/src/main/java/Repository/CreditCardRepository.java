@@ -24,7 +24,15 @@ public class CreditCardRepository implements Repository<CreditCard> {
 
     @Override
     public void add(CreditCard creditCard) throws SQLException {
-
+        String insertCard = " INSERT INTO CreditCard(accountnumber,cardNumber,cvv2,expireDate,password,status) VALUES (?, ?, ?, ?, ?, ?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(insertCard);
+        preparedStatement.setString(1,creditCard.getAccountNumber());
+        preparedStatement.setString(2,creditCard.getCardNumber());
+        preparedStatement.setString(3,creditCard.getCvv2());
+        preparedStatement.setDate(4,creditCard.getDate());
+        preparedStatement.setString(4,creditCard.getPassword());
+        preparedStatement.setString(4, String.valueOf(creditCard.getTypeAccount()));
+        preparedStatement.executeUpdate();
     }
 
     @Override
