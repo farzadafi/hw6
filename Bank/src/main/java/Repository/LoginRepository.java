@@ -39,6 +39,11 @@ public class LoginRepository implements Repository<Login> {
             return 0;
     }
 
+    @Override
+    public void show(String input) throws SQLException {
+
+    }
+
     public String findLogin(String username,String password) throws SQLException {
         String findlogin = "SELECT * FROM Login WHERE username = ? AND password = ? ";
         PreparedStatement preparedStatement = connection.prepareStatement(findlogin);

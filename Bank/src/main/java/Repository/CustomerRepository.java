@@ -37,6 +37,11 @@ public class CustomerRepository implements Repository<Customer> {
         return 0;
     }
 
+    @Override
+    public void show(String input) throws SQLException {
+
+    }
+
     //::::>
     public String findName(String nationalId) throws SQLException {
         String find = "SELECT * FROM Customer WHERE nationalId = ? ";

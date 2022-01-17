@@ -47,6 +47,11 @@ public class CreditCardRepository implements Repository<CreditCard> {
             return 0;
     }
 
+    @Override
+    public void show(String input) throws SQLException {
+
+    }
+
     public int findActiveCard(String accountNumber) throws SQLException {
         String findCard = "SELECT * FROM CreditCard WHERE accountnumber = ? AND status = ? ";
         PreparedStatement preparedStatement = connection.prepareStatement(findCard);

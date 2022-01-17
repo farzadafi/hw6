@@ -9,4 +9,6 @@ public interface Repository<T> {
 
     int find(String input) throws SQLException;
 
+    void show(String input) throws SQLException;
+
 }

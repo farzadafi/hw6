@@ -47,6 +47,11 @@ public class AccountRepository implements Repository<Account> {
             return 0;
     }
 
+    @Override
+    public void show(String input) throws SQLException {
+
+    }
+
     public int showAccount(String nationalId) throws SQLException {
         String show = "SELECT * FROM Account WHERE nationalId = ? ";
         PreparedStatement preparedStatement = connection.prepareStatement(show);
