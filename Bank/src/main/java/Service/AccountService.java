@@ -55,6 +55,10 @@ public class AccountService {
         return accountRepository.find(number);
     }
 
+    public String returnAccountNumber(int id) throws SQLException {
+        return accountRepository.returnAccountNumber(id);
+    }
+
 
 
 
