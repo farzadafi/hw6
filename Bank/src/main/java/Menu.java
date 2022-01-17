@@ -16,6 +16,7 @@ public class Menu {
     private ClerkService clerkService = new ClerkService();
     private CustomerService customerService = new CustomerService();
     private AccountService accountService = new AccountService();
+    private CreditCardService creditCardService = new CreditCardService();
 
 
     public Menu() throws SQLException, ClassNotFoundException {
@@ -155,6 +156,11 @@ public class Menu {
                     break;
 
                 case 3:
+                    int result1 = creditCardService.addCard();
+                    if(result1 == 1 )
+                        System.out.println("This card is successful added!");
+                    else
+                        System.out.println("Something is wrong");
 
                     break;
 
