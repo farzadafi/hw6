@@ -33,6 +33,7 @@ public class CreditCardService {
             else
                 break;
         }
+
         name = customerService.findName(nationalId);
         if ( name.equals("null")){
             System.out.println("you enter a wrong national id!");
@@ -44,10 +45,15 @@ public class CreditCardService {
             System.out.println(name + " unfortunately doesn't have any active account!");
             return 0;
         }
+
         System.out.print("Enter account number for add card it:");
         accountNumber = input.nextLine();
         if ( accountService.findAccountNumber(accountNumber) == 0 ){
             System.out.println("this account number is not define!");
+            return 0;
+        }
+        if( creditCardRepository.findActiveCard(accountNumber) == 1 ){
+            System.out.println("This account you enter have an active card!");
             return 0;
         }
 
