@@ -16,7 +16,7 @@ public class AccountRepository implements Repository<Account> {
                 "Account(id serial," +
                 "codeBranch varchar(50) REFERENCES BankBranch(codeBranch)," +
                 "nationalId varchar(50) REFERENCES Customer(nationalId)," +
-                "accountnumber varchar(50) ," +
+                "accountnumber varchar(50) PRIMARY KEY," +
                 "budget DECIMAL, " +
                 "status varchar(50))";
         PreparedStatement preparedStatement = connection.prepareStatement(createTable);
@@ -47,7 +47,7 @@ public class AccountRepository implements Repository<Account> {
             return 0;
     }
 
-    public void showAccount(String nationalId) throws SQLException {
+    public int showAccount(String nationalId) throws SQLException {
         String show = "SELECT * FROM Account WHERE nationalId = ? ";
         PreparedStatement preparedStatement = connection.prepareStatement(show);
         preparedStatement.setString(1,nationalId);
@@ -57,9 +57,10 @@ public class AccountRepository implements Repository<Account> {
                 if ((resultSet.getString("status").equals("ACTIVE")))
                     System.out.println(resultSet.getString("accountnumber"));
             }
+            return 1;
         }
         else
-            System.out.println("This national id doesn't have any active account in this bank!");
+            return 0;
     }
 
 
