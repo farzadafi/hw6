@@ -46,8 +46,10 @@ public class CreditCardService {
             return 0;
         }
 
-        System.out.print("Enter account number for add card it:");
-        accountNumber = input.nextLine();
+        System.out.print("Enter number's account for add card:");
+        int number = input.nextInt();
+        input.nextLine();
+        accountNumber = accountService.returnAccountNumber(number);
         if ( accountService.findAccountNumber(accountNumber) == 0 ){
             System.out.println("this account number is not define!");
             return 0;
