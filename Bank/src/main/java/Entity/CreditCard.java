@@ -3,15 +3,13 @@ package Entity;
 import java.sql.Date;
 
 public class CreditCard {
-    private String accountNumber,cardNumber,cvv2,password;
-    private Date date;
+    private String accountNumber,cardNumber,cvv2,password,date;
     private TypeAccount typeAccount;
 
-    public CreditCard(String accountNumber, String cardNumber, String cvv2, String password, Date date, TypeAccount typeAccount) {
+    public CreditCard(String accountNumber, String cardNumber, String cvv2, String date, TypeAccount typeAccount) {
         this.accountNumber = accountNumber;
         this.cardNumber = cardNumber;
         this.cvv2 = cvv2;
-        this.password = password;
         this.date = date;
         this.typeAccount = typeAccount;
     }
@@ -32,7 +30,7 @@ public class CreditCard {
         return password;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
