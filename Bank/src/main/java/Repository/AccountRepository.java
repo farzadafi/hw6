@@ -4,6 +4,7 @@ import Entity.Account;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class AccountRepository implements Repository<Account> {
@@ -35,7 +36,15 @@ public class AccountRepository implements Repository<Account> {
     }
 
     @Override
-    public int find(String input) throws SQLException {
-        return 0;
+    public int find(String accountNumber) throws SQLException {
+        String find = "SELECT * FROM Account WHERE accountnumber = ? ";
+        PreparedStatement preparedStatement = connection.prepareStatement(find);
+        preparedStatement.setString(1,accountNumber);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if(resultSet.next())
+            return 1;
+        else
+            return 0;
     }
+
 }
