@@ -61,6 +61,17 @@ public class AccountRepository implements Repository<Account> {
             return 1;
     }
 
+    public String returnAccountNumber(int id) throws SQLException {
+        String returnNumber = "SELECT * FROM Account WHERE id = ? ";
+        PreparedStatement preparedStatement = connection.prepareStatement(returnNumber);
+        preparedStatement.setInt(1,id);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if(resultSet.next())
+            return resultSet.getString("accountnumber");
+        else
+            return "null";
+    }
+
 
 
 
