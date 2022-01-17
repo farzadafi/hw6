@@ -47,4 +47,27 @@ public class AccountRepository implements Repository<Account> {
             return 0;
     }
 
+    public void showAccount(String nationalId) throws SQLException {
+        String show = "SELECT * FROM Account WHERE nationalId = ? ";
+        PreparedStatement preparedStatement = connection.prepareStatement(show);
+        preparedStatement.setString(1,nationalId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if(resultSet.next()) {
+            while (resultSet.next()) {
+                if ((resultSet.getString("status").equals("ACTIVE")))
+                    System.out.println(resultSet.getString("accountnumber"));
+            }
+        }
+        else
+            System.out.println("This national id doesn't have any active account in this bank!");
+    }
+
+
+
+
+
 }
+
+
+
+
