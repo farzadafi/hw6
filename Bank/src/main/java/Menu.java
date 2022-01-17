@@ -60,8 +60,7 @@ public class Menu {
             else if( resultFind.equals("CLERK"))
                 clerkMenu();
             else if( resultFind.equals("CUSTOMER"))
-                System.out.println("customer menu");
-                //customerMenu();
+                customerMenu();
         }
     }
 
@@ -171,12 +170,41 @@ public class Menu {
 
                 default:
                     System.out.println("you enter a wrong number!");
+            }//switch
+        }//while
+    }//clerkMenu
+
+    //::::>
+    public void customerMenu() throws SQLException {
+        isTrue = true;
+        while(isTrue){
+            System.out.println("*** Customer Menu ***");
+            System.out.println("1-password operation.");
+            System.out.println("2-Card To Card(move money).");
+            System.out.println("10-Exit.");
+            System.out.print("Please enter a number:");
+            command = input.nextInt();
+            input.nextLine();
+            switch(command){
+                case 1:
+                    creditCardService.setPassword(username);
+                    break;
+
+                case 2:
+
+                    break;
+
+                case 10:
+                    System.out.println("Good luck!");
+                    isTrue = false;
+
+                default:
+                    System.out.println("You enter a wrong number!");
 
             }//switch
-
         }//while
+    }//customerMenu
 
-    }//clerkMenu
 
 
 
