@@ -1,4 +1,5 @@
 package Service;
+import java.io.Console.*;
 
 import Entity.Account;
 import Entity.CreditCard;
@@ -6,6 +7,7 @@ import Entity.TypeAccount;
 import Repository.CreditCardRepository;
 
 import java.sql.SQLException;
+import java.sql.SQLOutput;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -73,6 +75,33 @@ public class CreditCardService {
         return 1;
     }
 
+    //::::>
+    public void setPassword(String nationalIdCustomer) throws SQLException {
+        String[] result = creditCardRepository.show(nationalIdCustomer);
+        if( result == null){
+            System.out.println("You dont have any card!");
+            return;
+        }
+        String number;
+        System.out.print("Please select number for set password:");
+        number = input.nextLine();
+        boolean equal = false;
+        for(int i=0;i<result.length;i++) {
+            if (result[i] == null)
+                break;
+            if (result[i].equals(number)) {
+                equal = true;
+                break;
+            }
+        }
+        if(equal == false ){
+            System.out.println("We dont have any card with this number!");
+            return;
+        }
+        System.out.print("Enter password for set:");
+        String password = input.nextLine();
+        creditCardRepository.setPassword(Integer.valueOf(number),password);
+    }
 
 
 
