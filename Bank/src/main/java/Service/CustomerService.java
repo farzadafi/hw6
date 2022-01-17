@@ -41,5 +41,9 @@ public class CustomerService {
         return fullName;
     }
 
+    public String findName(String nationalId){
+        return CustomerRepository.findName(nationalId);
+    }
+
 
 }
