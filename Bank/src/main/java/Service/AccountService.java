@@ -47,6 +47,10 @@ public class AccountService {
         return 1;
     }
 
+    public void showAccount(String nationalId) throws SQLException {
+        accountRepository.showAccount(nationalId);
+    }
+
 
 
 
