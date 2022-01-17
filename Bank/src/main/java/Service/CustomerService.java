@@ -41,8 +41,8 @@ public class CustomerService {
         return fullName;
     }
 
-    public String findName(String nationalId){
-        return CustomerRepository.findName(nationalId);
+    public String findName(String nationalId) throws SQLException {
+        return customerRepository.findName(nationalId);
     }
 
 
