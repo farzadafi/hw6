@@ -44,19 +44,24 @@ public class CreditCardRepository implements Repository<CreditCard> {
             return 0;
     }
 
-    public String show(String input) throws SQLException {
+    public String[] show(String input) throws SQLException {
         String show = "select  * from creditcard INNER JOIN account ON account.accountnumber = creditcard.accountnumber where account.nationalid = ? ";
         PreparedStatement preparedStatement = connection.prepareStatement(show);
         preparedStatement.setString(1,input);
         ResultSet resultSet = preparedStatement.executeQuery();
         if(!resultSet.isBeforeFirst()){
-            return "null";
+            return null;
         }
         else {
             System.out.println("You have this card:");
-            while (resultSet.next())
+            String numberId[] = new String[100];
+            int empty = 0;
+            while (resultSet.next()) {
                 System.out.println(resultSet.getInt("id") + ":" + resultSet.getString("cardNumber"));
-            return "show";
+                numberId[empty] = String.valueOf(resultSet.getInt("id"));
+                empty++;
+            }
+            return numberId;
         }
     }
 
@@ -70,5 +75,13 @@ public class CreditCardRepository implements Repository<CreditCard> {
             return 1;
         else
             return 0;
+    }
+
+    public void setPassword(int id,String password) throws SQLException {
+        String set = "UPDATE creditCard SET password = ? WHERE id = ? ";
+        PreparedStatement preparedStatement = connection.prepareStatement(set);
+        preparedStatement.setString(1,password);
+        preparedStatement.setInt(2,id);
+        preparedStatement.executeUpdate();
     }
 }
