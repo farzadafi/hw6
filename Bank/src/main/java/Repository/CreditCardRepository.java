@@ -2,10 +2,7 @@ package Repository;
 
 import Entity.CreditCard;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class CreditCardRepository implements Repository<CreditCard> {
     private Connection connection = Singleton.getInstance().getConnection();
@@ -47,15 +44,18 @@ public class CreditCardRepository implements Repository<CreditCard> {
             return 0;
     }
 
-    @Override
-    public void show(String input) throws SQLException {
+    public String show(String input) throws SQLException {
         String show = "select  * from creditcard INNER JOIN account ON account.accountnumber = creditcard.accountnumber where account.nationalid = ? ";
         PreparedStatement preparedStatement = connection.prepareStatement(show);
         preparedStatement.setString(1,input);
         ResultSet resultSet = preparedStatement.executeQuery();
-        if(resultSet != null ){
-            while(resultSet.next())
+        if(!resultSet.isBeforeFirst()){
+            return "null";
+        }
+        else {
+            while (resultSet.next())
                 System.out.println(resultSet.getInt("id") + ":" + resultSet.getString("cardNumber"));
+            return "show";
         }
     }
 
