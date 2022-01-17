@@ -52,15 +52,11 @@ public class AccountRepository implements Repository<Account> {
         PreparedStatement preparedStatement = connection.prepareStatement(show);
         preparedStatement.setString(1,nationalId);
         ResultSet resultSet = preparedStatement.executeQuery();
-        if(resultSet.next()) {
             while (resultSet.next()) {
                 if ((resultSet.getString("status").equals("ACTIVE")))
                     System.out.println(resultSet.getString("accountnumber"));
             }
             return 1;
-        }
-        else
-            return 0;
     }
 
 
