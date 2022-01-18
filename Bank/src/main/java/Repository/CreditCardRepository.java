@@ -20,6 +20,18 @@ public class CreditCardRepository implements Repository<CreditCard> {
         preparedStatement.execute();
     }
 
+    public boolean checkCardNumber(String cardNumber) throws SQLException {
+        String check = "SELECT * FROM CreditCard WHERE cardNumber = ? AND status = ? ";
+        PreparedStatement preparedStatement = connection.prepareStatement(check);
+        preparedStatement.setString(1,cardNumber);
+        preparedStatement.setString(2,"ACTIVE");
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if(resultSet.next())
+            return true;
+        else
+            return false;
+    }
+
     @Override
     public void add(CreditCard creditCard) throws SQLException {
         String insertCard = " INSERT INTO CreditCard(accountnumber,cardNumber,cvv2,expireDate,status) VALUES (?, ?, ?, ?, ?)";
@@ -84,4 +96,18 @@ public class CreditCardRepository implements Repository<CreditCard> {
         preparedStatement.setInt(2,id);
         preparedStatement.executeUpdate();
     }
+
+    public String[] returnInformationCard(int id) throws SQLException {
+        String findNumberCard = "SELECT * FROM CreditCard WHERE id = ? ";
+        PreparedStatement preparedStatement = connection.prepareStatement(findNumberCard);
+        preparedStatement.setInt(1,id);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        String[] result2 = new String[3];
+        result2[0] = resultSet.getString("accountnumber");
+        result2[1] = resultSet.getString("cardNumber");
+        result2[2] = resultSet.getString("password");
+        return result2;
+    }
+
+
 }
