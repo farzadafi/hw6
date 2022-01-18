@@ -160,12 +160,25 @@ public class CreditCardService {
                 }
             }
         }
+        System.out.print("Enter Expire date of your card:");
+        expireDate = input.nextLine();
+        if( !expireDate.equals(result2[3])){
+            System.out.println("You enter a wrong Expire Date");
+            return;
+        }
+        System.out.print("Enter cvv2 of your card:");
+        cvv2 = input.nextLine();
+        if( !cvv2.equals(result2[4])){
+            System.out.println("You enter a wrong cvv2");
+            return;
+        }
         System.out.print("Enter Destination number card:");
         destinationCardNumber = input.nextLine();
         if( !creditCardRepository.checkCardNumber(destinationCardNumber)) {
             System.out.println("This number card is incorrect!");
             return;
         }
+        String destinationAccount = creditCardRepository.returnAccountNumber(destinationCardNumber);
         LocalDate tempDate = LocalDate.now();
         Date date = Date.valueOf(tempDate);
         LocalTime tempTime = LocalTime.now();
@@ -178,10 +191,14 @@ public class CreditCardService {
             System.out.println("How are you,you dont have this amount for Transfer!");
             return;
         }
-        Transaction newTransaction = new Transaction(accountNumber,originCardNumber,destinationCardNumber,String.valueOf(amount),date,time, TypeTransaction.CARD_TO_CARD);
-        transactionService.addTransaction(newTransaction);
-        Transaction newTransactionFee = new Transaction(accountNumber,originCardNumber,destinationCardNumber,String.valueOf(600),date,time, TypeTransaction.TRANSFER_FEE);
-        transactionService.addTransaction(newTransactionFee);
+        accountService.depositCard(amount+600,accountNumber);
+        accountService.withdrawCard(amount,destinationAccount);
+        Transaction minesTransaction = new Transaction(accountNumber,originCardNumber,destinationCardNumber,String.valueOf(-amount),date,time, TypeTransaction.CARD_TO_CARD);
+        transactionService.addTransaction(minesTransaction);
+        Transaction feeTransaction = new Transaction(accountNumber,originCardNumber,destinationCardNumber,String.valueOf(-600),date,time, TypeTransaction.TRANSFER_FEE);
+        transactionService.addTransaction(feeTransaction);
+        Transaction plusTransaction = new Transaction(destinationAccount,originCardNumber,destinationCardNumber,String.valueOf(amount),date,time, TypeTransaction.CARD_TO_CARD);
+        transactionService.addTransaction(plusTransaction);
         System.out.println("This card to card is successful!");
     }
 
