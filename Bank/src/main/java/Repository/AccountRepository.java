@@ -81,6 +81,21 @@ public class AccountRepository implements Repository<Account> {
         return resultSet.getString("budget");
     }
 
+    public void depositCard(Double amount,String accountNumber) throws SQLException {
+        String deposit = "UPDATE Account SET budget = budget-? WHERE accountnumber = ? ";
+        PreparedStatement preparedStatement = connection.prepareStatement(deposit);
+        preparedStatement.setDouble(1,amount);
+        preparedStatement.setString(2,accountNumber);
+        preparedStatement.executeUpdate();
+    }
+
+    public void withdrawCard(Double amount,String accountNumber) throws SQLException {
+        String deposit = "UPDATE Account SET budget = budget+? WHERE accountnumber = ? ";
+        PreparedStatement preparedStatement = connection.prepareStatement(deposit);
+        preparedStatement.setDouble(1,amount);
+        preparedStatement.setString(2,accountNumber);
+        preparedStatement.executeUpdate();
+    }
 
 
 
