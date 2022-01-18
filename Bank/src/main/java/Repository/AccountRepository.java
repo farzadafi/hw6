@@ -77,6 +77,7 @@ public class AccountRepository implements Repository<Account> {
         PreparedStatement preparedStatement = connection.prepareStatement(returnAmount);
         preparedStatement.setString(1,accountNumber);
         ResultSet resultSet = preparedStatement.executeQuery();
+        resultSet.next();
         return resultSet.getString("budget");
     }
 
