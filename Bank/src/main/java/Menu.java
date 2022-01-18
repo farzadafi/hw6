@@ -17,6 +17,7 @@ public class Menu {
     private CustomerService customerService = new CustomerService();
     private AccountService accountService = new AccountService();
     private CreditCardService creditCardService = new CreditCardService();
+    private TransactionService transactionService = new TransactionService();
 
 
     public Menu() throws SQLException, ClassNotFoundException {
@@ -191,7 +192,7 @@ public class Menu {
                     break;
 
                 case 2:
-
+                    creditCardService.cardToCard(username);
                     break;
 
                 case 10:
