@@ -102,6 +102,7 @@ public class CreditCardRepository implements Repository<CreditCard> {
         PreparedStatement preparedStatement = connection.prepareStatement(findNumberCard);
         preparedStatement.setInt(1,id);
         ResultSet resultSet = preparedStatement.executeQuery();
+        resultSet.next();
         String[] result2 = new String[3];
         result2[0] = resultSet.getString("accountnumber");
         result2[1] = resultSet.getString("cardNumber");
