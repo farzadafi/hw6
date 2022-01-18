@@ -72,6 +72,14 @@ public class AccountRepository implements Repository<Account> {
             return "null";
     }
 
+    public String returnAmount(String accountNumber) throws SQLException {
+        String returnAmount = "SELECT * FROM Account WHERE accountnumber = ? ";
+        PreparedStatement preparedStatement = connection.prepareStatement(returnAmount);
+        preparedStatement.setString(1,accountNumber);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        return resultSet.getString("budget");
+    }
+
 
 
 
