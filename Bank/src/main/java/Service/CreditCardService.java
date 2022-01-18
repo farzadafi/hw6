@@ -1,13 +1,16 @@
 package Service;
-import java.io.Console.*;
 
-import Entity.Account;
 import Entity.CreditCard;
+import Entity.Transaction;
 import Entity.TypeAccount;
+import Entity.TypeTransaction;
 import Repository.CreditCardRepository;
 
+import java.sql.Date;
 import java.sql.SQLException;
-import java.sql.SQLOutput;
+import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -16,9 +19,12 @@ public class CreditCardService {
     private Random random = new Random();
     private CustomerService customerService = new CustomerService();
     private String nationalId,name = "empty",accountNumber,cardNumber,cvv2,expireDate;
+    private String originCardNumber,destinationCardNumber,password;
+    private double amount;
     private Scanner input = new Scanner(System.in);
     private LoginService loginService = new LoginService();
     private CreditCardRepository creditCardRepository = new CreditCardRepository();
+    private TransactionService transactionService = new TransactionService();
 
     public CreditCardService() throws SQLException, ClassNotFoundException {
     }
@@ -94,15 +100,90 @@ public class CreditCardService {
                 break;
             }
         }
-        if(equal == false ){
-            System.out.println("We dont have any card with this number!");
+        if(!equal){
+            System.out.println("We dont have any card with this number,please open your eyes!");
             return;
         }
         System.out.print("Enter password for set:");
         String password = input.nextLine();
-        creditCardRepository.setPassword(Integer.valueOf(number),password);
+        creditCardRepository.setPassword(Integer.parseInt(number),password);
+        System.out.println("set password for " + number + "  ID cared successful!");
     }
 
+    //::::>
+    public void cardToCard(String nationalIdCustomer) throws SQLException {
+        String[] result = creditCardRepository.show(nationalIdCustomer);
+        if (result == null) {
+            System.out.println("You dont have any card,Please call to clerk bank!");
+            return;
+        }
+        String number;
+        System.out.print("Please select number card for transfer money:");
+        number = input.nextLine();
+        boolean equal = false;
+        for (int i = 0; i < result.length; i++) {
+            if (result[i] == null)
+                break;
+            if (result[i].equals(number)) {
+                equal = true;
+                break;
+            }
+        }
+        if (!equal) {
+            System.out.println("We dont have any card with this number,please open your eyes!");
+            return;
+        }
+        String[] result2 = creditCardRepository.returnInformationCard(Integer.parseInt(number));
+        if(result2[2] == null){
+            System.out.println("For this card is not define password,Please define password for it and try again!");
+            return;
+        }
+        accountNumber = result2[0];
+        originCardNumber = result2[1];
+        password = result2[2];
+        String tempPassword;
+        int numberFalse = 0;
+        while(true){
+            System.out.print("Enter password for this card:");
+            tempPassword = input.nextLine();
+            if(tempPassword.equals(password))
+                break;
+            else{
+                if(numberFalse < 3 ){
+                    ++numberFalse;
+                    System.out.println("You enter " + numberFalse + " time false password");
+                if(numberFalse == 3 ){
+                    System.out.println("You enter 3 time incorrect password and I eat your card!(call to clerk)");
+                    creditCardRepository.setInactiveCard(Integer.parseInt(number));
+                    return;
+                    }
+                }
+            }
+        }
+        System.out.print("Enter Destination number card:");
+        destinationCardNumber = input.nextLine();
+        if( !creditCardRepository.checkCardNumber(destinationCardNumber)) {
+            System.out.println("This number card is incorrect!");
+            return;
+        }
+        LocalDate tempDate = LocalDate.now();
+        Date date = Date.valueOf(tempDate);
+        LocalTime tempTime = LocalTime.now();
+        Time time = Time.valueOf(tempTime);
+        String amountAccount = accountService.returnAmount(accountNumber);
+        System.out.println("You have " + amountAccount + " in this account");
+        System.out.print("How much do you want to Transfer(600 for Transfer fee):");
+        amount = input.nextDouble();
+        if( (amount+600) > Double.parseDouble(amountAccount)){
+            System.out.println("How are you,you dont have this amount for Transfer!");
+            return;
+        }
+        Transaction newTransaction = new Transaction(accountNumber,originCardNumber,destinationCardNumber,String.valueOf(amount),date,time, TypeTransaction.CARD_TO_CARD);
+        transactionService.addTransaction(newTransaction);
+        Transaction newTransactionFee = new Transaction(accountNumber,originCardNumber,destinationCardNumber,String.valueOf(600),date,time, TypeTransaction.TRANSFER_FEE);
+        transactionService.addTransaction(newTransactionFee);
+        System.out.println("This card to card is successful!");
+    }
 
 
 
