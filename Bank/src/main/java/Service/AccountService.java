@@ -63,6 +63,14 @@ public class AccountService {
         return accountRepository.returnAmount(accountNumber);
     }
 
+    public void depositCard(Double amount,String accountNumber) throws SQLException {
+        accountRepository.depositCard(amount,accountNumber);
+    }
+
+    public void withdrawCard(Double amount,String accountNumber) throws SQLException {
+        accountRepository.withdrawCard(amount,accountNumber);
+    }
+
 
 
 
