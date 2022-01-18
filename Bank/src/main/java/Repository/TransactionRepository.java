@@ -32,7 +32,7 @@ public class TransactionRepository implements Repository<Transaction> {
         preparedStatement.setString(2,transaction.getOriginCardNumber());
         preparedStatement.setString(3,transaction.getDestinationCardNumber());
         preparedStatement.setString(4,transaction.getAmount());
-        preparedStatement.setDate(5, (Date) transaction.getDate());
+        preparedStatement.setDate(5,transaction.getDate());
         preparedStatement.setTime(6,transaction.getTime());
         preparedStatement.setString(7, String.valueOf(transaction.getTypeTransaction()));
         preparedStatement.executeUpdate();
