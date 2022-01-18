@@ -45,7 +45,7 @@ public class CreditCardRepository implements Repository<CreditCard> {
     }
 
     public String[] show(String input) throws SQLException {
-        String show = "select  * from creditcard INNER JOIN account ON account.accountnumber = creditcard.accountnumber where account.nationalid = ? ";
+        String show = "select  * from creditcard INNER JOIN account ON account.accountnumber = creditcard.accountnumber where account.nationalid = ? AND creditcard.status = 'ACTIVE' ";
         PreparedStatement preparedStatement = connection.prepareStatement(show);
         preparedStatement.setString(1,input);
         ResultSet resultSet = preparedStatement.executeQuery();
