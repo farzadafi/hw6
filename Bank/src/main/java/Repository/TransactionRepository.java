@@ -26,7 +26,7 @@ public class TransactionRepository implements Repository<Transaction> {
 
     @Override
     public void add(Transaction transaction) throws SQLException {
-        String insertTransaction = "INSERT INTO TransactionTable (accountnumber,originCardNumber,destinationCardNumber,amount,dataT,timeT,typeTransaction) VALUES (?, ?, ?, ?, ?, ?, ?) ";
+        String insertTransaction = "INSERT INTO TransactionTable (accountnumber,originCardNumber,destinationCardNumber,amount,dateT,timeT,typeTransaction) VALUES (?, ?, ?, ?, ?, ?, ?) ";
         PreparedStatement preparedStatement = connection.prepareStatement(insertTransaction);
         preparedStatement.setString(1,transaction.getAccountNumber());
         preparedStatement.setString(2,transaction.getOriginCardNumber());
