@@ -202,7 +202,7 @@ public class Menu {
                 default:
                     System.out.println("You enter a wrong number!");
 
-            }//switch
+            }
         }//while
     }//customerMenu
 
