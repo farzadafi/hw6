@@ -103,10 +103,12 @@ public class CreditCardRepository implements Repository<CreditCard> {
         preparedStatement.setInt(1,id);
         ResultSet resultSet = preparedStatement.executeQuery();
         resultSet.next();
-        String[] result2 = new String[3];
+        String[] result2 = new String[5];
         result2[0] = resultSet.getString("accountnumber");
         result2[1] = resultSet.getString("cardNumber");
         result2[2] = resultSet.getString("password");
+        result2[3] = resultSet.getString("expireDate");
+        result2[4] = resultSet.getString("cvv2");
         return result2;
     }
 
@@ -118,5 +120,13 @@ public class CreditCardRepository implements Repository<CreditCard> {
         preparedStatement.executeUpdate();
     }
 
+    public String returnAccountNumber(String cardNumber) throws SQLException {
+        String account = "SELECT * FROM CreditCard WHERE cardNumber = ? ";
+        PreparedStatement preparedStatement = connection.prepareStatement(account);
+        preparedStatement.setString(1,cardNumber);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        resultSet.next();
+        return resultSet.getString("accountnumber");
+    }
 
 }
