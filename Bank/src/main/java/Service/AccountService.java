@@ -59,6 +59,10 @@ public class AccountService {
         return accountRepository.returnAccountNumber(id);
     }
 
+    public String returnAmount(String accountNumber) throws SQLException {
+        return accountRepository.returnAmount(accountNumber);
+    }
+
 
 
 
