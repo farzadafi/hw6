@@ -109,5 +109,13 @@ public class CreditCardRepository implements Repository<CreditCard> {
         return result2;
     }
 
+    public void setInactiveCard(int id) throws SQLException {
+        String setinactive = "UPDATE CreditCard SET status = ? WHERE id = ? ";
+        PreparedStatement preparedStatement = connection.prepareStatement(setinactive);
+        preparedStatement.setString(1,"INACTIVE");
+        preparedStatement.setInt(2,id);
+        preparedStatement.executeUpdate();
+    }
+
 
 }
