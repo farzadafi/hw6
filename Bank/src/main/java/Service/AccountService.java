@@ -45,10 +45,8 @@ public class AccountService {
         return 1;
     }
 
-    public void showAccount() throws SQLException {
-        System.out.print("Enter national Id customer:");
-        nationalId = input.nextLine();
-        accountRepository.showAccount(nationalId);
+    public void showAccountForCustomer(String nationalIdCustomer) throws SQLException {
+        accountRepository.showAccount(nationalIdCustomer);
     }
 
     public int showAccount(String nationalId) throws SQLException {
@@ -73,6 +71,12 @@ public class AccountService {
 
     public void withdrawCard(Double amount,String accountNumber) throws SQLException {
         accountRepository.withdrawCard(amount,accountNumber);
+    }
+
+    public void showAccountForClerk() throws SQLException {
+        System.out.print("Enter Customer national Id:");
+        nationalId = input.nextLine();
+        accountRepository.showAccountForClerk(nationalId);
     }
 
 
