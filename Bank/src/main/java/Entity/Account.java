@@ -36,4 +36,24 @@ public class Account {
     public TypeAccount getTypeAccount() {
         return typeAccount;
     }
+
+    public void setCodeBranch(String codeBranch) {
+        this.codeBranch = codeBranch;
+    }
+
+    public void setNationalId(String nationalId) {
+        this.nationalId = nationalId;
+    }
+
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
+    public void setBudget(Double budget) {
+        this.budget = budget;
+    }
+
+    public void setTypeAccount(TypeAccount typeAccount) {
+        this.typeAccount = typeAccount;
+    }
 }
