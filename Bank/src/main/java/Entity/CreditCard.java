@@ -14,6 +14,9 @@ public class CreditCard {
         this.typeAccount = typeAccount;
     }
 
+    public CreditCard() {
+    }
+
     public String getAccountNumber() {
         return accountNumber;
     }
@@ -38,5 +41,39 @@ public class CreditCard {
         return typeAccount;
     }
 
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
 
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
+    }
+
+    public void setCvv2(String cvv2) {
+        this.cvv2 = cvv2;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setTypeAccount(TypeAccount typeAccount) {
+        this.typeAccount = typeAccount;
+    }
+
+    @Override
+    public String toString() {
+        return "CreditCard{" +
+                "accountNumber='" + accountNumber + '\'' +
+                ", cardNumber='" + cardNumber + '\'' +
+                ", cvv2='" + cvv2 + '\'' +
+                ", password='" + password + '\'' +
+                ", date='" + date + '\'' +
+                ", typeAccount=" + typeAccount +
+                '}';
+    }
 }
