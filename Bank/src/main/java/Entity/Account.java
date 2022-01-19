@@ -14,6 +14,9 @@ public class Account {
         this.typeAccount = typeAccount;
     }
 
+    public Account() {
+    }
+
     public String getCodeBranch() {
         return codeBranch;
     }
