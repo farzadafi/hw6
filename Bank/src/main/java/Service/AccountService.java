@@ -5,6 +5,7 @@ import Entity.TypeAccount;
 import Repository.AccountRepository;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -46,7 +47,12 @@ public class AccountService {
     }
 
     public void showAccountForCustomer(String nationalIdCustomer) throws SQLException {
-        accountRepository.showAccount(nationalIdCustomer);
+        List<Account> accountList = accountRepository.showAllAccount(nationalIdCustomer);
+        for (Account account : accountList)
+        {
+            if(account.getTypeAccount().toString().equals("ACTIVE"))
+                System.out.println(account.toString());
+        }
     }
 
     public int showAccount(String nationalId) throws SQLException {
@@ -74,10 +80,15 @@ public class AccountService {
     }
 
     public void showAccountForClerk() throws SQLException {
-        System.out.print("Enter Customer national Id:");
+        System.out.println("Enter national Id Customer:");
         nationalId = input.nextLine();
-        accountRepository.showAccountForClerk(nationalId);
+        List<Account> accountList = accountRepository.showAllAccount(nationalId);
+        for (Account account : accountList)
+        {
+                System.out.println(account.toString());
+        }
     }
+
 
 
 
