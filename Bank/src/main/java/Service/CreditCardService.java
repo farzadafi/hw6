@@ -213,21 +213,16 @@ public class CreditCardService {
         if(!accountService.getCheck()){
             return;
         }
-        System.out.print("Enter account number for view card(0):");
+        System.out.print("Enter account number for view card:");
         accountNumber = input.nextLine();
-        if(accountNumber.equals("0"))
-            return;
-        int i=0;
         List<CreditCard> creditCardList = creditCardRepository.findAllCard(accountNumber);
         for (CreditCard creditCard : creditCardList)
         {
             System.out.println(creditCard.toString());
-            i++;
         }
-        if(i == 0)
-            System.out.println(name + " doesn't have any account yet!");
-
     }
+
+
 
 
 

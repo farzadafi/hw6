@@ -1,11 +1,11 @@
 package Repository;
 
 import Entity.Transaction;
+import Entity.TypeTransaction;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TransactionRepository implements Repository<Transaction> {
     private Connection connection = Singleton.getInstance().getConnection();
@@ -37,6 +37,28 @@ public class TransactionRepository implements Repository<Transaction> {
         preparedStatement.setString(7, String.valueOf(transaction.getTypeTransaction()));
         preparedStatement.executeUpdate();
     }
+
+    public List<Transaction> findAllTransaction(String accountNumber, Date date) throws SQLException {
+        String find = "SELECT * FROM TransactionTable WHERE accountnumber = ? AND dateT > ? ";
+        PreparedStatement preparedStatement = connection.prepareStatement(find);
+        preparedStatement.setString(1,accountNumber);
+        preparedStatement.setDate(2,date);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        List<Transaction> transactionList = new ArrayList<>();
+        while(resultSet.next()){
+            Transaction transaction = new Transaction();
+            transaction.setAccountNumber(resultSet.getString("accountnumber"));
+            transaction.setOriginCardNumber(resultSet.getString("originCardNumber"));
+            transaction.setDestinationCardNumber(resultSet.getString("destinationCardNumber"));
+            transaction.setAmount(resultSet.getString("amount"));
+            transaction.setDate(resultSet.getDate("dateT"));
+            transaction.setTime(resultSet.getTime("timeT"));
+            transaction.setTypeTransaction(TypeTransaction.valueOf(resultSet.getString("typeTransaction")));
+            transactionList.add(transaction);
+        }
+        return transactionList;
+    }
+
 
     @Override
     public int find(String input) throws SQLException {
