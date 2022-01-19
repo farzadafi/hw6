@@ -137,6 +137,10 @@ public class CreditCardService {
             return;
         }
         accountNumber = result2[0];
+        if(!accountService.checkAccount(accountNumber)){
+            System.out.println("This account is not Active!");
+            return;
+        }
         originCardNumber = result2[1];
         password = result2[2];
         String tempPassword;
