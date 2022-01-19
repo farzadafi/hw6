@@ -1,9 +1,7 @@
 package Service;
 
 import Entity.Account;
-import Entity.Customer;
 import Entity.TypeAccount;
-import Entity.TypeUser;
 import Repository.AccountRepository;
 
 import java.sql.SQLException;
@@ -45,6 +43,12 @@ public class AccountService {
         Account newAccount = new Account(codeBranch,nationalId,number,budget, TypeAccount.ACTIVE);
         accountRepository.add(newAccount);
         return 1;
+    }
+
+    public void showAccount() throws SQLException {
+        System.out.print("Enter national Id customer:");
+        nationalId = input.nextLine();
+        accountRepository.showAccount(nationalId);
     }
 
     public int showAccount(String nationalId) throws SQLException {
