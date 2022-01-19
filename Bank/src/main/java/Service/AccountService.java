@@ -89,7 +89,8 @@ public class AccountService {
     }
 
     public void showAccountForClerk() throws SQLException {
-        System.out.println("Enter national Id Customer:");
+        check = true;
+        System.out.print("Enter national Id Customer:");
         nationalId = input.nextLine();
         String name = customerService.findName(nationalId);
         if( name.equals("null")){
@@ -97,15 +98,16 @@ public class AccountService {
             return;
         }
         System.out.println(name + " has this account:");
-        int i=0;
         List<Account> accountList = accountRepository.showAllAccount(nationalId);
+        if(accountList.isEmpty()) {
+            check = false;
+            System.out.println("This national id doesn't have any account!");
+            return;
+        }
         for (Account account : accountList)
         {
                 System.out.println(account.toString());
-                i++;
         }
-        if(i == 0)
-            System.out.println(name + " doesn't have any account yet!");
     }
 
     public boolean getCheck(){
