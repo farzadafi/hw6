@@ -140,6 +140,7 @@ public class Menu {
             System.out.println("1-Add Customer.");
             System.out.println("2-Add account Customer.");
             System.out.println("3-Add Credit Card Account.");
+            System.out.println("4-View account with nationalId customer.");
             System.out.println("10-Exit.");
             System.out.print("Please select a number:");
             command = input.nextInt();
@@ -161,7 +162,10 @@ public class Menu {
                         System.out.println("This card is successful added!");
                     else
                         System.out.println("Something is wrong");
+                    break;
 
+                case 4:
+                    accountService.showAccountForClerk();
                     break;
 
                 case 10:
