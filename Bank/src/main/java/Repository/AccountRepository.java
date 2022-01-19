@@ -118,6 +118,18 @@ public class AccountRepository implements Repository<Account> {
         return accountList;
     }
 
+    public boolean checkAccount(String accountNumber) throws SQLException {
+        String check = "SELECT * FROM Account WHERE accountnumber = ? ";
+        PreparedStatement preparedStatement = connection.prepareStatement(check);
+        preparedStatement.setString(1,accountNumber);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        resultSet.next();
+        if(resultSet.getString("status").equals("ACTIVE"))
+            return true;
+        else
+            return false;
+    }
+
 
 
 }
