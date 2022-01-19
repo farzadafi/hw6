@@ -210,6 +210,9 @@ public class CreditCardService {
         }
         System.out.println(name + " have this account:");
         accountService.showAccountForCustomer(nationalId);
+        if(!accountService.getCheck()){
+            return;
+        }
         System.out.print("Enter account number for view card(0):");
         accountNumber = input.nextLine();
         if(accountNumber.equals("0"))

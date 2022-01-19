@@ -18,6 +18,7 @@ public class AccountService {
     private Double budget;
     private CustomerService customerService = new CustomerService();
     Random random = new Random();
+    private static boolean check = true;
 
     public AccountService() throws SQLException, ClassNotFoundException {
     }
@@ -48,17 +49,19 @@ public class AccountService {
     }
 
     public void showAccountForCustomer(String nationalIdCustomer) throws SQLException {
+        check = true;
         List<Account> accountList = accountRepository.showAllAccount(nationalIdCustomer);
-        int i=0;
+        if(accountList.isEmpty()) {
+            check = false;
+            System.out.println("This national id doesn't have any account!");
+            return;
+        }
         for (Account account : accountList)
         {
             if(account.getTypeAccount().toString().equals("ACTIVE")) {
                 System.out.println(account.toString());
-                i++;
             }
         }
-        if(i == 0 )
-            System.out.println("you dont have any active account!");
     }
 
     public int showAccount(String nationalId) throws SQLException {
@@ -103,6 +106,10 @@ public class AccountService {
         }
         if(i == 0)
             System.out.println(name + " doesn't have any account yet!");
+    }
+
+    public boolean getCheck(){
+        return check;
     }
 
 
