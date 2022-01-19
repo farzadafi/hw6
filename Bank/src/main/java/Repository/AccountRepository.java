@@ -1,11 +1,14 @@
 package Repository;
 
 import Entity.Account;
+import Entity.TypeAccount;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AccountRepository implements Repository<Account> {
     private Connection connection = Singleton.getInstance().getConnection();;
@@ -97,16 +100,22 @@ public class AccountRepository implements Repository<Account> {
         preparedStatement.executeUpdate();
     }
 
-    public void showAccountForClerk(String nationalId) throws SQLException {
+    public List<Account> showAllAccount(String nationalId) throws SQLException {
         String show = "SELECT * FROM Account WHERE nationalId = ? ";
         PreparedStatement preparedStatement = connection.prepareStatement(show);
         preparedStatement.setString(1,nationalId);
         ResultSet resultSet = preparedStatement.executeQuery();
-        while (resultSet.next()) {
-            System.out.print(resultSet.getInt("id") + ": ");
-            System.out.print(resultSet.getString("accountnumber"));
-            System.out.println("  status:" + resultSet.getString("status"));
-            }
+        List<Account> accountList = new ArrayList<>();
+        while(resultSet.next()){
+            Account account = new Account();
+            account.setCodeBranch(resultSet.getString("codeBranch"));
+            account.setNationalId(resultSet.getString("nationalId"));
+            account.setAccountNumber(resultSet.getString("accountnumber"));
+            account.setBudget(resultSet.getDouble("budget"));
+            account.setTypeAccount(TypeAccount.valueOf(resultSet.getString("status")));
+            accountList.add(account);
+        }
+        return accountList;
     }
 
 
