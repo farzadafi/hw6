@@ -1,9 +1,6 @@
 package Service;
 
-import Entity.CreditCard;
-import Entity.Transaction;
-import Entity.TypeAccount;
-import Entity.TypeTransaction;
+import Entity.*;
 import Repository.CreditCardRepository;
 
 import java.sql.Date;
@@ -11,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -200,6 +198,32 @@ public class CreditCardService {
         Transaction plusTransaction = new Transaction(destinationAccount,originCardNumber,destinationCardNumber,String.valueOf(amount),date,time, TypeTransaction.CARD_TO_CARD);
         transactionService.addTransaction(plusTransaction);
         System.out.println("This card to card is successful!");
+    }
+
+    public void showCardForClerk() throws SQLException {
+        System.out.print("Enter national Id customer:");
+        nationalId = input.nextLine();
+        String name = customerService.findName(nationalId);
+        if(name.equals("null")){
+            System.out.println("This national Id not found!");
+            return;
+        }
+        System.out.println(name + " have this account:");
+        accountService.showAccountForCustomer(nationalId);
+        System.out.print("Enter account number for view card(0):");
+        accountNumber = input.nextLine();
+        if(accountNumber.equals("0"))
+            return;
+        int i=0;
+        List<CreditCard> creditCardList = creditCardRepository.findAllCard(accountNumber);
+        for (CreditCard creditCard : creditCardList)
+        {
+            System.out.println(creditCard.toString());
+            i++;
+        }
+        if(i == 0)
+            System.out.println(name + " doesn't have any account yet!");
+
     }
 
 
