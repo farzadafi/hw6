@@ -16,6 +16,7 @@ public class AccountService {
     private String codeBranch,nationalId,accountNumber;
     private AccountRepository accountRepository = new AccountRepository();
     private Double budget;
+    private CustomerService customerService = new CustomerService();
     Random random = new Random();
 
     public AccountService() throws SQLException, ClassNotFoundException {
@@ -48,11 +49,17 @@ public class AccountService {
 
     public void showAccountForCustomer(String nationalIdCustomer) throws SQLException {
         List<Account> accountList = accountRepository.showAllAccount(nationalIdCustomer);
+        System.out.println("You have this account active:");
+        int i=0;
         for (Account account : accountList)
         {
-            if(account.getTypeAccount().toString().equals("ACTIVE"))
+            if(account.getTypeAccount().toString().equals("ACTIVE")) {
                 System.out.println(account.toString());
+                i++;
+            }
         }
+        if(i == 0 )
+            System.out.println("you dont have any active account!");
     }
 
     public int showAccount(String nationalId) throws SQLException {
@@ -82,11 +89,21 @@ public class AccountService {
     public void showAccountForClerk() throws SQLException {
         System.out.println("Enter national Id Customer:");
         nationalId = input.nextLine();
+        String name = customerService.findName(nationalId);
+        if( name.equals("null")){
+            System.out.println("This national Id not found!");
+            return;
+        }
+        System.out.println(name + " has this account:");
+        int i=0;
         List<Account> accountList = accountRepository.showAllAccount(nationalId);
         for (Account account : accountList)
         {
                 System.out.println(account.toString());
+                i++;
         }
+        if(i == 0)
+            System.out.println(name + " doesn't have any account yet!");
     }
 
 
