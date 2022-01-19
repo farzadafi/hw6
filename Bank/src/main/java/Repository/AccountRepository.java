@@ -130,6 +130,14 @@ public class AccountRepository implements Repository<Account> {
             return false;
     }
 
+    public void setInactiveAccount(String accountNumber) throws SQLException {
+        String update = "UPDATE Account SET status = ? WHERE accountnumber = ? ";
+        PreparedStatement preparedStatement = connection.prepareStatement(update);
+        preparedStatement.setString(1,"INACTIVE");
+        preparedStatement.setString(2,accountNumber);
+        preparedStatement.executeUpdate();
+    }
+
 
 
 }
