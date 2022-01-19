@@ -193,6 +193,7 @@ public class Menu {
             System.out.println("1-password operation.");
             System.out.println("2-Card To Card(move money).");
             System.out.println("3-Show my account(Active).");
+            System.out.println("4-Show Transaction.");
             System.out.println("10-Exit.");
             System.out.print("Please enter a number:");
             command = input.nextInt();
@@ -208,6 +209,10 @@ public class Menu {
 
                 case 3:
                     accountService.showAccountForCustomer(username);
+                    break;
+
+                case 4:
+                    transactionService.showTransaction(username);
                     break;
 
                 case 10:
