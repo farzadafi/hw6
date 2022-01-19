@@ -114,6 +114,10 @@ public class AccountService {
         return check;
     }
 
+    public boolean checkAccount(String numberAccount) throws SQLException {
+        return accountRepository.checkAccount(numberAccount);
+    }
+
 
 
 
