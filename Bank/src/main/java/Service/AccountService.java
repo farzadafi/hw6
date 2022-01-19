@@ -49,7 +49,6 @@ public class AccountService {
 
     public void showAccountForCustomer(String nationalIdCustomer) throws SQLException {
         List<Account> accountList = accountRepository.showAllAccount(nationalIdCustomer);
-        System.out.println("You have this account active:");
         int i=0;
         for (Account account : accountList)
         {
