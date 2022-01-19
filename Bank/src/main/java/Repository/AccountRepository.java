@@ -97,6 +97,17 @@ public class AccountRepository implements Repository<Account> {
         preparedStatement.executeUpdate();
     }
 
+    public void showAccountForClerk(String nationalId) throws SQLException {
+        String show = "SELECT * FROM Account WHERE nationalId = ? ";
+        PreparedStatement preparedStatement = connection.prepareStatement(show);
+        preparedStatement.setString(1,nationalId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            System.out.print(resultSet.getInt("id") + ": ");
+            System.out.print(resultSet.getString("accountnumber"));
+            System.out.println("  status:" + resultSet.getString("status"));
+            }
+    }
 
 
 
