@@ -1,8 +1,11 @@
 package Repository;
 
 import Entity.CreditCard;
+import Entity.TypeAccount;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CreditCardRepository implements Repository<CreditCard> {
     private Connection connection = Singleton.getInstance().getConnection();
@@ -127,6 +130,25 @@ public class CreditCardRepository implements Repository<CreditCard> {
         ResultSet resultSet = preparedStatement.executeQuery();
         resultSet.next();
         return resultSet.getString("accountnumber");
+    }
+
+    public List<CreditCard> findAllCard(String accountNumber) throws SQLException {
+        String show = "SELECT * FROM CreditCard WHERE accountnumber = ? ";
+        PreparedStatement preparedStatement = connection.prepareStatement(show);
+        preparedStatement.setString(1,accountNumber);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        List<CreditCard> creditCardList = new ArrayList<>();
+        while(resultSet.next()){
+            CreditCard creditCard = new CreditCard();
+            creditCard.setAccountNumber(resultSet.getString("accountnumber"));
+            creditCard.setCardNumber(resultSet.getString("cardNumber"));
+            creditCard.setCvv2(resultSet.getString("cvv2"));
+            creditCard.setDate(resultSet.getString("expireDate"));
+            creditCard.setTypeAccount(TypeAccount.valueOf(resultSet.getString("status")));
+            creditCard.setPassword(resultSet.getString("password"));
+            creditCardList.add(creditCard);
+        }
+        return creditCardList;
     }
 
 }
