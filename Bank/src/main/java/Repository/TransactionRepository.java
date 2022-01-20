@@ -39,7 +39,7 @@ public class TransactionRepository implements Repository<Transaction> {
     }
 
     public List<Transaction> findAllTransaction(String accountNumber, Date date) throws SQLException {
-        String find = "SELECT * FROM TransactionTable WHERE accountnumber = ? AND dateT > ? ";
+        String find = "SELECT * FROM TransactionTable WHERE accountnumber = ? AND dateT >= ? ";
         PreparedStatement preparedStatement = connection.prepareStatement(find);
         preparedStatement.setString(1,accountNumber);
         preparedStatement.setDate(2,date);
