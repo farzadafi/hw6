@@ -181,6 +181,11 @@ public class CreditCardService {
             return;
         }
         String destinationAccount = creditCardRepository.returnAccountNumber(destinationCardNumber);
+        if( !accountService.checkAccount(destinationAccount)){
+            System.out.println("This account number is inactive!");
+            return;
+        }
+
         LocalDate tempDate = LocalDate.now();
         Date date = Date.valueOf(tempDate);
         LocalTime tempTime = LocalTime.now();
