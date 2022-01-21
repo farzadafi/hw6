@@ -1,10 +1,16 @@
 package Service;
 
 import Entity.Account;
+import Entity.Transaction;
 import Entity.TypeAccount;
+import Entity.TypeTransaction;
 import Repository.AccountRepository;
 
+import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
@@ -19,6 +25,7 @@ public class AccountService {
     private CustomerService customerService = new CustomerService();
     Random random = new Random();
     private static boolean check = true;
+    private TransactionService transactionService;
 
     public AccountService() throws SQLException, ClassNotFoundException {
     }
@@ -147,6 +154,52 @@ public class AccountService {
         accountRepository.setInactiveAccount(accountNumber);
         System.out.println("This account seccessful inactived!");
     }
+
+    public void DepositToAccount() throws SQLException, ClassNotFoundException {
+            try {
+                System.out.print("Enter national Id customer:");
+                nationalId = input.nextLine();
+                nationalIdChecker(nationalId);
+            } catch (InvalidNationalException e) {
+                System.out.println("you enter a wrong national Id!");
+                return;
+            }
+            String name = customerService.findName(nationalId);
+            if (name.equals("null")) {
+                System.out.println("This national Id is not defined before!");
+                return;
+            }
+        System.out.println(name + " have this account in us Bank(active and inactive):");
+        showAccountForCustomer(nationalId);
+        System.out.print("Enter account number for deposit money:");
+        accountNumber = input.nextLine();
+        if(!accountRepository.checkAccount(accountNumber)){
+            System.out.println("you enter a wrong account number!");
+            return;
+        }
+        System.out.print("Enter amount for withdraw:");
+        budget = input.nextDouble();
+        accountRepository.withdrawCard(budget,accountNumber);
+        LocalDate tempDate = LocalDate.now();
+        Date date = Date.valueOf(tempDate);
+        LocalTime tempTime = LocalTime.now();
+        Time time = Time.valueOf(tempTime);
+        Transaction plusTransaction = new Transaction(accountNumber,"Clerk","Clerk",String.valueOf(budget),date,time, TypeTransaction.CLERKWHITHDRAW);
+        transactionService = new TransactionService();
+        transactionService.addTransaction(plusTransaction);
+        System.out.println(budget + " successful added to account " + name);
+    }
+
+    public void nationalIdChecker(String nationalId){
+        if(nationalId.length() > 10 )
+            throw new InvalidNationalException();
+        for (Character character:nationalId.toCharArray()) {
+            if(!Character.isDigit(character))
+                throw new InvalidNationalException("National Id should contain only digits!");
+        }
+    }
+
+
 
 
 
