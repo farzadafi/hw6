@@ -44,7 +44,7 @@ public class Menu {
     }
 
     //::::>
-    public void enterMenu() throws SQLException {
+    public void enterMenu() throws SQLException, ClassNotFoundException {
         System.out.print("Please enter your username:");
         username = input.nextLine();
         System.out.print("Please enter your password:");
@@ -133,7 +133,7 @@ public class Menu {
         }
     }
 
-    public void clerkMenu() throws SQLException {
+    public void clerkMenu() throws SQLException, ClassNotFoundException {
         isTrue = true;
         while(isTrue){
             System.out.println("*** Clerk Menu ***");
@@ -143,6 +143,7 @@ public class Menu {
             System.out.println("4-View account with nationalId customer.");
             System.out.println("5-View All Credit card with numberAccount.");
             System.out.println("6-INACTIVE account!.");
+            System.out.println("7-Deposit money to account number(try).");
             System.out.println("10-Exit.");
             System.out.print("Please select a number:");
             command = input.nextInt();
@@ -176,6 +177,10 @@ public class Menu {
 
                 case 6:
                     accountService.setInactiveAccount();
+                    break;
+
+                case 7:
+                    accountService.DepositToAccount();
                     break;
 
 
