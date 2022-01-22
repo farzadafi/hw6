@@ -111,7 +111,8 @@ public class Menu {
         while(isTrue) {
             System.out.println("*** Boss Menu ***");
             System.out.println("1-add clerk.");
-            System.out.println("2-Exit.");
+            System.out.println("2-Inactive account!");
+            System.out.println("5-Exit.");
             System.out.print("Please select a number:");
             command = input.nextInt();
             input.nextLine();
@@ -122,6 +123,10 @@ public class Menu {
                     break;
 
                 case 2:
+                    accountService.setInactiveAccountForBoss();
+                    break;
+
+                case 5:
                     System.out.println("Good luck!");
                     isTrue = false;
                     break;
