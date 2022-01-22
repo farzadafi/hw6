@@ -199,6 +199,36 @@ public class AccountService {
         }
     }
 
+    public void setInactiveAccountForBoss() throws SQLException {
+        System.out.print("Enter nationalId customer:");
+        nationalId = input.nextLine();
+        String name = customerService.findName(nationalId);
+        if(name.equals("null")){
+            System.out.println("This national id is not defined Before!");
+            return;
+        }
+        List<Account> accountList = accountRepository.showAllAccount(nationalId);
+        int i=0;
+        for (Account account:accountList) {
+            if(account.getTypeAccount().toString().equals("ACTIVE")){
+                System.out.println(account.toString());
+                i++;
+            }
+        }
+        if(i == 0 ){
+            System.out.println("This Customer doesn't have any Account!");
+            return;
+        }
+        System.out.print("Enter the account number for INACTIVE:");
+        accountNumber = input.nextLine();
+        if(accountRepository.find(accountNumber) == 0 ){
+            System.out.println("You enter a wrong account Number!");
+            return;
+        }
+        accountRepository.setInactiveAccount(accountNumber);
+        System.out.println("This account seccessful inactived!");
+    }
+
 
 
 
