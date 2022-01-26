@@ -13,6 +13,7 @@ public class BankBranchService {
     private LoginService loginService = new LoginService();
     private Scanner input = new Scanner(System.in);
     private String nameBank,bossFullName,nationalId,password,codeBranch;
+    private Utility utility = new Utility();
 
     public BankBranchService() throws SQLException, ClassNotFoundException {
     }
@@ -24,25 +25,23 @@ public class BankBranchService {
         if( bankService.findBankName(nameBank) == 0 ) {
             return 1;
         }
-        System.out.print("Enter code Branch:");
-        codeBranch = input.nextLine();
+        codeBranch = utility.setCodeBranch();
         if( bankBranchRepository.find(codeBranch) == 1 ){
             return 2;
         }
-        System.out.print("Enter boss full name:");
-        bossFullName = input.nextLine();
+        System.out.println("boss full name");
+        bossFullName = utility.setName();
         while(true){
-            System.out.print("Enter your national Id(username):");
-            nationalId = input.nextLine();
+            System.out.println("national Id(username)");
+            nationalId = utility.setNationalId();
             if( loginService.findNationalId(nationalId) == 1 ) {
                 System.out.println("you enter a wrong national id");
-                continue;
             }
             else
                 break;
         }
-        System.out.print("Enter password for " + bossFullName + ":" );
-        password = input.nextLine();
+        System.out.println("password for " + bossFullName + ":" );
+        password = utility.setPassword();
         loginService.addNewLogin(nationalId,password, TypeUser.BOSS);
         BankBranch newBankBranch = new BankBranch(nameBank,codeBranch,bossFullName,nationalId,password);
         bankBranchRepository.add(newBankBranch);
