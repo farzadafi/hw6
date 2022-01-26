@@ -23,7 +23,7 @@ public class BankRepository implements Repository<Bank>{
     }
 
     //::::>
-    public void add(Bank bank) throws SQLException {
+    public void add(Bank bank) {
         try {
             String insertBank = "INSERT INTO Bank (nameBank) VALUES (?) ";
             PreparedStatement preparedStatement = connection.prepareStatement(insertBank);
@@ -35,7 +35,7 @@ public class BankRepository implements Repository<Bank>{
     }
 
     //::::>
-    public int find(String name) throws SQLException {
+    public int find(String name) {
         try {
             String find = "SELECT * FROM Bank WHERE nameBank = ? ";
             PreparedStatement preparedStatement = connection.prepareStatement(find);
