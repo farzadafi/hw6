@@ -10,14 +10,15 @@ public class BankService {
     private Scanner input = new Scanner(System.in);
     private String nameBank;
     private BankRepository bankRepository = new BankRepository();
+    private Utility utility = new Utility();
 
     public BankService() throws SQLException, ClassNotFoundException {
     }
 
     //::::>
     public int addBank() throws SQLException {
-        System.out.print("Please enter you name Bank:");
-        nameBank = input.nextLine();
+        System.out.println("Please enter your name Bank");
+        nameBank = utility.setName();
         if( bankRepository.find(nameBank) == 1 )
             return 1;
         else{
