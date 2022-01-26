@@ -2,6 +2,7 @@ import Entity.Bank;
 import Service.*;
 
 import java.sql.SQLException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Menu {
@@ -29,8 +30,16 @@ public class Menu {
         System.out.println("1-signIn(Enter)");
         System.out.println("2-Exit");
         System.out.print("Please select a number:");
-        command = input.nextInt();
-        input.nextLine();
+        while(true) {
+            try {
+                command = input.nextInt();
+                input.nextLine();
+                break;
+            } catch (InputMismatchException exception) {
+                input.nextLine();
+                System.out.print("Enter a number:");
+            }
+        }
         switch(command){
             case 1:
                 return 1;
@@ -73,8 +82,16 @@ public class Menu {
             System.out.println("1-Add Bank.");
             System.out.println("2-add Bank Branch.");
             System.out.println("3-Exit.");
-            command = input.nextInt();
-            input.nextLine();
+            while(true) {
+                try {
+                    command = input.nextInt();
+                    input.nextLine();
+                    break;
+                } catch (InputMismatchException exception) {
+                    input.nextLine();
+                    System.out.print("Enter a number:");
+                }
+            }
             switch (command)
             {
                 case 1:
@@ -114,8 +131,16 @@ public class Menu {
             System.out.println("2-Inactive account!");
             System.out.println("5-Exit.");
             System.out.print("Please select a number:");
-            command = input.nextInt();
-            input.nextLine();
+            while(true) {
+                try {
+                    command = input.nextInt();
+                    input.nextLine();
+                    break;
+                } catch (InputMismatchException exception) {
+                    input.nextLine();
+                    System.out.print("Enter a number:");
+                }
+            }
             switch(command){
                 case 1:
                     String result = clerkService.addClerk(username);
@@ -151,8 +176,16 @@ public class Menu {
             System.out.println("7-Deposit money to account number(try).");
             System.out.println("10-Exit.");
             System.out.print("Please select a number:");
-            command = input.nextInt();
-            input.nextLine();
+            while(true) {
+                try {
+                    command = input.nextInt();
+                    input.nextLine();
+                    break;
+                } catch (InputMismatchException exception) {
+                    input.nextLine();
+                    System.out.print("Enter a number:");
+                }
+            }
             switch(command){
                 case 1:
                     String result = customerService.addCustomer(username);
@@ -211,8 +244,16 @@ public class Menu {
             System.out.println("4-Show Transaction.");
             System.out.println("10-Exit.");
             System.out.print("Please enter a number:");
-            command = input.nextInt();
-            input.nextLine();
+            while(true) {
+                try {
+                    command = input.nextInt();
+                    input.nextLine();
+                    break;
+                } catch (InputMismatchException exception) {
+                    input.nextLine();
+                    System.out.print("Enter a number:");
+                }
+            }
             switch(command){
                 case 1:
                     creditCardService.setPassword(username);
