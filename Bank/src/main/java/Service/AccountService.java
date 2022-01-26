@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
@@ -49,7 +50,16 @@ public class AccountService {
                 break;
         }
         System.out.print("Enter budget:");
-        budget = input.nextDouble();
+        while (true) {
+            try {
+                budget = input.nextDouble();
+                input.nextLine();
+                break;
+            } catch (InputMismatchException exception) {
+                input.nextLine();
+                System.out.print("Enter correct budget:");
+            }
+        }
         Account newAccount = new Account(codeBranch,nationalId,number,budget, TypeAccount.ACTIVE);
         accountRepository.add(newAccount);
         return 1;
