@@ -2,29 +2,31 @@ package Service;
 
 import Service.Exception.InvalidCodeBranch;
 import Service.Exception.InvalidName;
+import Service.Exception.InvalidNationalId;
 
 import java.util.Scanner;
 
 public class Utility {
-    private String firstName,codeBranch;
+    private String Name,codeBranch,nationalId;
     private Scanner input = new Scanner(System.in);
     private InvalidName invalidName = new InvalidName();
     private InvalidCodeBranch invalidCodeBranch = new InvalidCodeBranch();
+    private InvalidNationalId invalidNationalId = new InvalidNationalId();
 
 
 
-    public String setBankName(){
+    public String setName(){
         while(true){
             System.out.print("Enter name(just alpha):");
             try {
-                firstName = input.nextLine();
-                invalidName.checkName(firstName);
+                Name = input.nextLine();
+                invalidName.checkName(Name);
                 break;
             }catch (InvalidName except){
                 System.out.println(except.getMessage());
             }
         }
-        return firstName;
+        return Name;
     }
 
     public String setCodeBranch(){
@@ -39,6 +41,20 @@ public class Utility {
             }
         }
         return codeBranch;
+    }
+
+    public String setNationalId(){
+        while(true){
+            System.out.print("Enter National Id(just number):");
+            try {
+                nationalId = input.nextLine();
+                invalidNationalId.nationalIdChecker(nationalId);
+                break;
+            }catch (InvalidNationalId except){
+                System.out.println(except.getMessage());
+            }
+        }
+        return nationalId;
     }
 
 }//
