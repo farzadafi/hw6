@@ -28,7 +28,7 @@ public class BankBranchRepository implements Repository<BankBranch> {
     }
 
     @Override
-    public void add(BankBranch bankBranch) throws SQLException {
+    public void add(BankBranch bankBranch) {
         try {
             String insertBank = "INSERT INTO BankBranch (nameBank,codeBranch,BossfullName,nationalId,password) VALUES (?, ?, ?, ?, ?) ";
             PreparedStatement preparedStatement = connection.prepareStatement(insertBank);
@@ -44,7 +44,7 @@ public class BankBranchRepository implements Repository<BankBranch> {
     }
 
     @Override
-    public int find(String input) throws SQLException {
+    public int find(String input) {
         try {
             String find = "SELECT * FROM BankBranch WHERE codeBranch = ? ";
             PreparedStatement preparedStatement = connection.prepareStatement(find);
@@ -61,7 +61,7 @@ public class BankBranchRepository implements Repository<BankBranch> {
     }
 
 
-    public String findCodeBranch(String nationalId) throws SQLException {
+    public String findCodeBranch(String nationalId) {
         try {
             String findCode = "SELECT * FROM BankBranch WHERE nationalId = ? ";
             PreparedStatement preparedStatement = connection.prepareStatement(findCode);
