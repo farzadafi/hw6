@@ -203,14 +203,6 @@ public class AccountService {
         System.out.println(budget + " successful added to account " + name);
     }
 
-    public void nationalIdChecker(String nationalId){
-        if(nationalId.length() > 10 )
-            throw new InvalidNationalException();
-        for (Character character:nationalId.toCharArray()) {
-            if(!Character.isDigit(character))
-                throw new InvalidNationalException("National Id should contain only digits!");
-        }
-    }
 
     public void setInactiveAccountForBoss() throws SQLException {
         System.out.print("Enter nationalId customer:");
@@ -239,7 +231,7 @@ public class AccountService {
             return;
         }
         accountRepository.setInactiveAccount(accountNumber);
-        System.out.println("This account seccessful inactived!");
+        System.out.println("This account successful inactive!");
     }
 
 
