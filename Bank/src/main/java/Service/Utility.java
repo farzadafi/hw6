@@ -3,15 +3,17 @@ package Service;
 import Service.Exception.InvalidCodeBranch;
 import Service.Exception.InvalidName;
 import Service.Exception.InvalidNationalId;
+import Service.Exception.InvalidPassword;
 
 import java.util.Scanner;
 
 public class Utility {
-    private String Name,codeBranch,nationalId;
+    private String Name,codeBranch,nationalId,password;
     private Scanner input = new Scanner(System.in);
     private InvalidName invalidName = new InvalidName();
     private InvalidCodeBranch invalidCodeBranch = new InvalidCodeBranch();
     private InvalidNationalId invalidNationalId = new InvalidNationalId();
+    private InvalidPassword invalidPassword = new InvalidPassword();
 
 
 
@@ -56,5 +58,20 @@ public class Utility {
         }
         return nationalId;
     }
+
+    public String setPassword(){
+        while(true) {
+            System.out.print("Enter your password:");
+            try {
+                password = input.nextLine();
+                invalidPassword.passwordCheck(password);
+                break;
+            } catch (InvalidPassword except) {
+                System.out.println(except.getMessage());
+            }
+        }
+        return password;
+    }
+
 
 }//
