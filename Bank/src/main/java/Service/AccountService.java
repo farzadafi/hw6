@@ -162,18 +162,12 @@ public class AccountService {
             return;
         }
         accountRepository.setInactiveAccount(accountNumber);
-        System.out.println("This account seccessful inactived!");
+        System.out.println("This account successful inactive!");
     }
 
     public void DepositToAccount() throws SQLException, ClassNotFoundException {
-            try {
                 System.out.print("Enter national Id customer:");
                 nationalId = input.nextLine();
-                nationalIdChecker(nationalId);
-            } catch (InvalidNationalException e) {
-                System.out.println("you enter a wrong national Id!");
-                return;
-            }
             String name = customerService.findName(nationalId);
             if (name.equals("null")) {
                 System.out.println("This national Id is not defined before!");
@@ -188,7 +182,16 @@ public class AccountService {
             return;
         }
         System.out.print("Enter amount for withdraw:");
-        budget = input.nextDouble();
+        while (true) {
+            try {
+                budget = input.nextDouble();
+                input.nextLine();
+                break;
+            } catch (InputMismatchException exception) {
+                input.nextLine();
+                System.out.print("Enter correct Amount:");
+            }
+        }
         accountRepository.withdrawCard(budget,accountNumber);
         LocalDate tempDate = LocalDate.now();
         Date date = Date.valueOf(tempDate);
